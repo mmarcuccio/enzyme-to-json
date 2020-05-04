@@ -9,6 +9,8 @@ var _omitBy = _interopRequireDefault(require("lodash/omitBy"));
 
 var _isNil = _interopRequireDefault(require("lodash/isNil"));
 
+var _reactIs = require("react-is");
+
 var _Debug = require("enzyme/build/Debug");
 
 var _RSTTraversal = require("enzyme/build/RSTTraversal");
@@ -57,7 +59,7 @@ function internalNodeToJson(node, options) {
     return node.map(child => internalNodeToJson(child, options));
   }
 
-  if (options.mode === 'deep' && typeof node.type === 'function') {
+  if (options.mode === 'deep' && (typeof node.type === 'function' || node.type.$$typeof === _reactIs.ForwardRef)) {
     return internalNodeToJson(node.rendered, options);
   }
 
